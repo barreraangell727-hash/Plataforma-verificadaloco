@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plataforma Verificada</title>
   <meta name="description" content="Acceso VIP por WhatsApp. Atención 24/7.">
+  <meta name="robots" content="noindex,nofollow">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -143,7 +144,6 @@
 </head>
 
 <body>
-
   <div class="wrap">
     <div class="logo">
       PLATAFORMA<br>VERIFICADA
@@ -179,29 +179,20 @@
     }
 
     btn.addEventListener("click", function(){
-      if(clicked) return;              // evita doble evento/doble redirección
+      if(clicked) return;
       clicked = true;
       btn.disabled = true;
       btn.style.opacity = "0.85";
 
-      // Dispara Contact en el click (lo que necesitás para la conversión)
       try{
         if(typeof window.fbq === "function"){
           window.fbq('track','Contact', { channel:'whatsapp' });
-
-          // Opcional (no molesta): Lead para tener alternativa de optimización
-          // window.fbq('track','Lead', { channel:'whatsapp' });
         }
-      }catch(e){ /* no-op */ }
+      }catch(e){}
 
-      // Pequeño delay para que el pixel alcance a enviar el evento
       setTimeout(goWhatsApp, 250);
-
-      // Fallback: por si el navegador bloquea algo, igual redirige
       setTimeout(goWhatsApp, 1200);
     });
   </script>
-
 </body>
-
 </html>
