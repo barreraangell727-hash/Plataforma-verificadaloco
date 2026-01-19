@@ -8,22 +8,32 @@
   <meta name="robots" content="noindex,nofollow">
 
   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '644477532061168');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=644477532061168&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;
+      n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
+      if(!f._fbq)f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e); t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s);
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '644477532061168');
+    fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=644477532061168&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
   <style>
     *{ box-sizing:border-box }
@@ -157,33 +167,31 @@ src="https://www.facebook.com/tr?id=644477532061168&ev=PageView&noscript=1"
   </div>
 
   <script>
-    const PHONE_E164 = "5491176017604";
-    const MESSAGE = "Hola, vengo desde el anuncio. Quiero un usuario y reclamar el beneficio del 100%.";
+  const PHONE_E164 = "5491176017604";
+  const MESSAGE = "Hola, vengo desde el anuncio. Quiero un usuario y reclamar el bono del 100%.";
 
-    const btn = document.getElementById("waBtn");
-    let clicked = false;
+  const btn = document.getElementById("waBtn");
+  let fired = false;
 
-    function goWhatsApp(){
-      window.location.href =
-        "https://wa.me/" + PHONE_E164 + "?text=" + encodeURIComponent(MESSAGE);
-    }
+  function goWhatsApp(){
+    const url = "https://wa.me/" + PHONE_E164 + "?text=" + encodeURIComponent(MESSAGE);
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 
-    btn.addEventListener("click", function(){
-      if(clicked) return;
-      clicked = true;
-      btn.disabled = true;
-      btn.style.opacity = "0.85";
+  btn.addEventListener("click", function(){
+    if (fired) return;
+    fired = true;
 
-      try{
-        if(typeof window.fbq === "function"){
-          window.fbq('track','Contact', { channel:'whatsapp' });
-        }
-      }catch(e){}
+    btn.disabled = true;
+    btn.style.opacity = "0.85";
 
-      setTimeout(goWhatsApp, 250);
-      setTimeout(goWhatsApp, 1200);
-    });
-  </script>
-</body>
-</html>
+    try {
+      if (typeof fbq === "function") {
+        fbq('track', 'Contact', { channel: 'whatsapp' });
+        fbq('track', 'Purchase', { currency: 'USD', value: 1.00 });
+      }
+    } catch(e){}
 
+    setTimeout(goWhatsApp, 250);
+  });
+</script>
